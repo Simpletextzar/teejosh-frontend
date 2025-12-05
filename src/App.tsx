@@ -1,4 +1,3 @@
-import React from "react";
 import Inventory from "./components/InventoryView";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
