@@ -29,7 +29,14 @@ const Navbar = () => {
             </Link>
           </li>
 
-          <li className="text-gray-500 cursor-not-allowed">Ventas</li>
+          <li>
+            <Link
+              to="/ventas"
+              className="hover:text-blue-400 transition-colors duration-200"
+            >
+              Ventas
+            </Link>
+          </li>
         </ul>
 
         {/* RIGHT SIDE LOGOUT BUTTON */}

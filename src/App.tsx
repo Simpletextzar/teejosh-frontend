@@ -1,4 +1,5 @@
 import Inventory from "./components/InventoryView";
+import VentasView from "./components/VentasView";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -20,6 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/inventario" element={<Inventory />} />
+            <Route path="/ventas" element={<VentasView />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </>

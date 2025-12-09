@@ -52,3 +52,27 @@ export async function fetchLenguajes() {
   if (!res.ok) throw new Error("Error al obtener lenguajes");
   return res.json();
 }
+
+export async function fetchVentas() {
+  const res = await fetch(`${BASE_URL}/ventas`);
+  if (!res.ok) throw new Error("Error obteniendo ventas");
+  return res.json();
+}
+
+export async function createVenta(data: any) {
+  const res = await fetch(`${BASE_URL}/ventas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Error al crear la venta");
+  return res.json();
+}
+
+export async function deleteVenta(id: number) {
+  const res = await fetch(`${BASE_URL}/ventas/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Error eliminando venta");
+  return res.json();
+}

@@ -28,12 +28,12 @@ const Home = () => {
             Ver Inventario
           </Link>
 
-          <button
-            disabled
-            className="bg-gray-300 text-gray-600 py-3 rounded-lg font-semibold cursor-not-allowed"
+          <Link
+            to="/ventas"
+            className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
           >
-            Ventas (Próximamente)
-          </button>
+            Ventas
+          </Link>
         </div>
       </div>
     </div>
