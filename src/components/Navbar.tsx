@@ -1,48 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+type NavbarProps = {
+  onLogout: () => void;
+};
+
+const Navbar = ({ onLogout }: NavbarProps) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("auth");
-    window.location.href = "/login"; // redirect
+    onLogout(); // 🔥 tell App to update state
+    navigate("/login");
   };
 
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 shadow-md">
       <div className="flex justify-between items-center">
-        {/* LEFT SIDE LINKS */}
         <ul className="flex gap-6 text-lg">
           <li>
-            <Link
-              to="/"
-              className="hover:text-blue-400 transition-colors duration-200"
-            >
-              Inicio
-            </Link>
+            <Link to="/">Inicio</Link>
           </li>
-
           <li>
-            <Link
-              to="/inventario"
-              className="hover:text-blue-400 transition-colors duration-200"
-            >
-              Inventario
-            </Link>
+            <Link to="/inventario">Inventario</Link>
           </li>
-
           <li>
-            <Link
-              to="/ventas"
-              className="hover:text-blue-400 transition-colors duration-200"
-            >
-              Ventas
-            </Link>
+            <Link to="/ventas">Ventas</Link>
           </li>
         </ul>
 
-        {/* RIGHT SIDE LOGOUT BUTTON */}
         <button
           onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200"
+          className="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700"
         >
           Cerrar sesión
         </button>

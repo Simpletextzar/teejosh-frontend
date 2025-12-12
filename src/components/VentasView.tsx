@@ -3,7 +3,7 @@ import { fetchVentas, fetchProductos, createVenta, deleteVenta } from "../api";
 
 const VentasView = () => {
   const [ventas, setVentas] = useState([]);
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [modal, setModal] = useState(false);
@@ -86,17 +86,26 @@ const VentasView = () => {
         <tbody>
           {ventas.map((v: any) => (
             <tr key={v.id_reg_venta}>
-              <td>{v.id_reg_venta}</td>
-              <td>{v.m_pago}</td>
-              <td>S/ {v.monto_total}</td>
-              <td>{v.fecha?.split("T")[0]}</td>
+              <td className="py-3">{v.id_reg_venta}</td>
+              <td className="py-3">S/ {v.monto_total}</td>
+              <td className="py-3">{v.m_pago}</td>
+              <td className="py-3">{v.fecha?.split("T")[0]}</td>
 
-              <td>
-                {v.producto_venta.map((p: any) => (
-                  <div key={p.id}>
-                    Prod {p.id_producto} — Cant: {p.cantidad} — S/ {p.monto}
-                  </div>
-                ))}
+              <td className="py-3">
+                {v.producto_venta.map((p: any) => {
+                  const prod = productos.find(
+                    (x: any) => x.id === p.id_producto
+                  );
+                  const nombre = prod
+                    ? prod.nombre
+                    : `Producto ${p.id_producto}`;
+
+                  return (
+                    <div key={p.id}>
+                      {nombre} — Cant: {p.cantidad} — S/ {p.monto}
+                    </div>
+                  );
+                })}
               </td>
 
               <td>
@@ -149,6 +158,7 @@ const VentasView = () => {
                   ))}
                 </select>
 
+                <label className="text-sm font-medium">Cantidad</label>
                 <input
                   type="number"
                   placeholder="Cantidad"
@@ -159,6 +169,7 @@ const VentasView = () => {
                   }
                 />
 
+                <label className="text-sm font-medium">Precio / Monto</label>
                 <input
                   type="number"
                   placeholder="Monto"

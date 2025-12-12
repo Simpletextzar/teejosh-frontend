@@ -1,16 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+type LoginProps = {
+  onLogin: () => void;
+};
+
+const Login = ({ onLogin }: LoginProps) => {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (user === "teejosh" && pass === "esis3412") {
       localStorage.setItem("auth", "true");
-      window.location.href = "/"; // go to home
+      onLogin(); // 🔥 notify App that login succeeded
+      navigate("/"); // 🔥 go to home
     } else {
       setError("Credenciales incorrectas");
     }
